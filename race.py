@@ -10,15 +10,31 @@ def update():
 
     car.x -= held_keys['a'] * 3 * time.dt
     car.x += held_keys['d'] * 3 * time.dt
-    car.y += held_keys['s'] * -2 * time.dt
-    car.y += held_keys['w'] * 5 * time.dt
 
-    camera.y = car.y
     if held_keys['w']:
+        camera.y = car.y
+        car.y += held_keys['w'] * 5 * time.dt
         road1.y = camera.y
         offset += time.dt * 1
         setattr(road1, "texture_offset", (0, offset))
 
+    if held_keys['s']:
+        camera.y = car.y
+        car.y += held_keys['s'] * -2 * time.dt
+        road1.y = camera.y
+        offset += time.dt * -0.3
+        setattr(road1, "texture_offset", (0, offset))
+
+    if car.x >= 6.2:
+        car.x = 6.2
+        car.shake()
+    if car.x <= -6.2:
+        car.x = -6.2
+        car.shake()
+
+    e1_car.y += random.uniform(3, 6) * time.dt
+    e2_car.y += random.uniform(3, 6) * time.dt
+    e3_car.y += random.uniform(3, 6) * time.dt
 
 
 app = Ursina()
@@ -39,6 +55,10 @@ road1 = Entity(
     z = 1
 )
 
+
+e1_car = duplicate(car, x = -5, y = 0)
+e2_car = duplicate(car, x = -2, y = 0)
+e3_car = duplicate(car, x = 5, y = 0)
 
 offset = 0
 app.run()

@@ -10,3 +10,32 @@ class Car(Entity):
             scale=scale,
             x=x
         )
+
+    def update(self):
+
+        if held_keys['w']:
+            self.rotation_z = 0
+            camera.y = self.y
+            self.y += held_keys['w'] * 5 * time.dt
+
+        if held_keys['s']:
+            self.rotation_z = 0
+            camera.y = self.y
+            self.y += held_keys['s'] * -2 * time.dt
+
+        if held_keys['d']:
+            self.x += held_keys['d'] * 3 * time.dt
+            self.rotation_z = 7
+
+        if held_keys['a']:
+            self.x -= held_keys['a'] * 3 * time.dt
+            self.rotation_z = -7
+
+        if self.x >= 6.2:
+            self.x = 6.2
+            self.shake()
+
+        if self.x <= -6.2:
+            self.x = -6.2
+            self.shake()
+

@@ -15,7 +15,7 @@ class Road(Entity):
 
         if held_keys['w']:
             self.y = camera.y
-            self.offset += time.dt * 1.5
+            self.offset += time.dt * 2
             setattr(self, "texture_offset", (0, self.offset))
 
         if held_keys['s']:

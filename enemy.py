@@ -3,13 +3,13 @@ import random
 
 
 class Enemy(Entity):
-    def __init__(self, scale=(2.3, 5), x=2):
+    def __init__(self, scale=(2.9, 5.9), x=2):
         super().__init__(
             model='quad',
-            texture='assets\car4.png',
+            texture='assets/car8.png',
             collidar='box',
             scale=scale,
-            color=color.random_color(),
+            #color=color.random_color(),
             x=x
         )
 

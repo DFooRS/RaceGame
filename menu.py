@@ -4,7 +4,7 @@ from ursina import *
 class MainMenu(Entity):
     def __init__(self):
         super().__init__(
-            parent=camera.ui,
+            parent=camera.ui
             )
         self.start_menu = Entity(parent=self, enabled=True)
         self.game = 0

@@ -2,10 +2,10 @@ from ursina import *
 
 
 class Road(Entity):
-    def __init__(self, scale=15, z=1):
+    def __init__(self, texture='assets/road.png', scale=15, z=1):
         super().__init__(
             model="quad",
-            texture='assets/road.png',
+            texture=texture,
             scale=scale,
             z=z,
             offset=0
@@ -15,7 +15,7 @@ class Road(Entity):
 
         if held_keys['w']:
             self.y = camera.y
-            self.offset += time.dt * 1
+            self.offset += time.dt * 1.5
             setattr(self, "texture_offset", (0, self.offset))
 
         if held_keys['s']:

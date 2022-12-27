@@ -5,12 +5,23 @@ from ursina import *
 from car import Car
 from road import Road
 from menu import MainMenu
+from RaceGame.enemy import Enemy
 
 
 def update():
     if menu.game == 1:
-        car.visible = True
-        road1.visible = True
+        car.enable()
+        road1.enable()
+        e1_car.enable()
+
+        if not held_keys['w']:
+            e1_car.y += 10 * time.dt
+
+        e1_car.y += random.uniform(2.7, 5) * time.dt
+
+        if car.y > 90:
+            road1.disable()
+            road2.enable()
 
 
 if __name__ == '__main__':
@@ -20,10 +31,16 @@ if __name__ == '__main__':
     camera.fov = 40
 
     menu = MainMenu()
+
     car = Car()
-    car.visible = False
+    car.disable()
+
     road1 = Road()
-    road1.visible = False
-    #road1.offset = 0
+    road1.disable()
+    road2 = Road(texture='assets/road1.png')
+    road2.disable()
+
+    e1_car = Enemy(x=-2)
+    e1_car.disable()
 
     app.run()

@@ -2,10 +2,10 @@ from ursina import *
 
 
 class Car(Entity):
-    def __init__(self, scale=(2.2, 4.4), x=2):
+    def __init__(self, scale=(2.3, 5), x=2):
         super().__init__(
             model='quad',
-            texture='assets\car.png',
+            texture='assets\car4.png',
             collidar='box',
             scale=scale,
             x=x
@@ -16,7 +16,7 @@ class Car(Entity):
         if held_keys['w']:
             self.rotation_z = 0
             camera.y = self.y
-            self.y += held_keys['w'] * 5 * time.dt
+            self.y += held_keys['w'] * 4.7 * time.dt
 
         if held_keys['s']:
             self.rotation_z = 0

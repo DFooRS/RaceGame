@@ -8,7 +8,8 @@ class Car(Entity):
             texture='assets/car5.png',
             collidar='box',
             scale=scale,
-            x=x
+            x=x,
+            collision=True
         )
 
     def update(self):

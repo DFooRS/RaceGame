@@ -7,11 +7,11 @@ class Enemy(Entity):
         super().__init__(
             model='quad',
             texture=texture,
-            collidar='box',
+            #collider=,
             scale=scale,
-            collision=True,
             x=x
         )
+        self.collider = BoxCollider(self, center=Vec3(0, 0), size=Vec3(0.85, 0.95))
 
     def update(self):
 
@@ -21,4 +21,7 @@ class Enemy(Entity):
 
         if self.x <= -6.2:
             self.x = -6.2
+            self.shake()
+
+        if self.intersects().hit:
             self.shake()

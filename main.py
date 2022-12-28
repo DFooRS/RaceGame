@@ -10,7 +10,7 @@ from enemy import Enemy
 
 
 def pause_handler_input(key):
-    if menu.game == 1:
+    if menu.game == 2:
         if key == 'escape':
             application.paused = not application.paused
             pause.pause_menu.enable()
@@ -40,10 +40,10 @@ def update():
         if not held_keys['w']:
             e1_car.y += 17 * time.dt
 
-        e1_car.y += random.uniform(5, 7.5) * time.dt
+        e1_car.y += random.uniform(5, 7) * time.dt
 
         if car.y > 178:
-            destroy(road1)
+            road1.disable()
             road2.enable()
 
         if car.y > 180:
@@ -56,14 +56,15 @@ if __name__ == '__main__':
     camera.ortographic = True
     camera.fov = 40
     pause_handler = Entity(ignore_paused=True)
-    window.fullscreen = True
+    #window.fullscreen = True
 
     menu = MainMenu()
     pause = PauseMenu()
     pause.pause_menu.disable()
+
     car = Car()
     car.disable()
-    clone_car = Enemy('assets/car5.png', (3, 6))
+    clone_car = Enemy(texture='assets/car5.png', scale=(3, 6))
     clone_car.disable()
 
     road1 = Road()

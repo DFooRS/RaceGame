@@ -7,9 +7,9 @@ class MainMenu(Entity):
         super().__init__(
             parent=camera.ui
             )
-        self.start_menu = Entity(parent=self)
+        self.start_menu = Entity(parent=self, model = 'quad', texture='assets/background.png', scale=(2, 1.5))
         self.game = 0
-        self.place = 2
+        self.place = 4
 
         start_button = Button(text="Start",
                               color=color.black,
@@ -39,10 +39,17 @@ class MainMenu(Entity):
         exit_button.on_click = Func(quit_game)
         start_button.on_click = Func(play_game)
 
-    def finish(self, car, e1_car):
+    def finish(self, car, e1_car, e2_car, e3_car):
         application.pause()
         if car.y > e1_car.y:
             self.place -= 1
+
+        if car.y > e2_car.y:
+            self.place -= 1
+
+        if car.y > e3_car.y:
+            self.place -= 1
+
         empty = Text('\n\n\n')
 
         if self.place == 1:
@@ -50,16 +57,19 @@ class MainMenu(Entity):
                      x=0,
                      y=0,
                      )
+
         if self.place == 2:
             t = Text('Not bad!\nYou took the 2 place',
                      x=0,
                      y=0,
                      )
+
         if self.place == 3:
             t = Text('You can do better!\nYou took the 3 place',
                      x=0,
                      y=0,
                      )
+
         if self.place == 4:
             t = Text("Don't get upset!\nYou took the 4 place",
                      x=0,
@@ -74,7 +84,7 @@ class MainMenu(Entity):
 
         exit_button.on_click = application.quit
 
-        pied = Entity(model='quad', texture='assets/pied.png', scale=3)
+        pied = Entity(model='quad', texture='assets/cup.png', scale=(10, 6))
         wp = WindowPanel(
             title='F I N I S H!',
             content=(
@@ -84,7 +94,7 @@ class MainMenu(Entity):
                 exit_button
             ),
             y=0.4,
-            color=color.black
+            color=color.black,
         )
 
     def set_game(self):

@@ -9,7 +9,7 @@ from menu import PauseMenu
 from enemy import Enemy
 
 
-def pause_handler_input(key):
+def key_handler_input(key):
     if menu.game == 2:
         if key == 'escape':
             application.paused = not application.paused
@@ -23,6 +23,8 @@ def update():
         clone_car.enable()
         road1.enable()
         e1_car.enable()
+        e2_car.enable()
+        e3_car.enable()
 
         if held_keys['w']:
             road1.offset -= time.dt * 2
@@ -38,16 +40,20 @@ def update():
         destroy(clone_car)
         car.enable()
         if not held_keys['w']:
-            e1_car.y += 17 * time.dt
+            e1_car.y += 18 * time.dt
+            e2_car.y += 15 * time.dt
+            e3_car.y += 17 * time.dt
 
-        e1_car.y += random.uniform(5, 7) * time.dt
+        e1_car.y += e1_car_speed * time.dt
+        e2_car.y += e2_car_speed * time.dt
+        e3_car.y += e3_car_speed * time.dt
 
         if car.y > 178:
             road1.disable()
             road2.enable()
 
         if car.y > 180:
-            menu.finish(car, e1_car)
+            menu.finish(car, e1_car, e2_car, e3_car)
 
 
 if __name__ == '__main__':
@@ -73,6 +79,15 @@ if __name__ == '__main__':
     road2.disable()
 
     e1_car = Enemy(x=-2)
+    e1_car_speed = random.uniform(5, 7)
     e1_car.disable()
-    pause_handler.input = pause_handler_input
+    e2_car = Enemy(texture='assets/car9.png', scale=(3, 5.5), x=-5)
+    e2_car.color = color.pink
+    e2_car_speed = random.uniform(5, 7)
+    e2_car.disable()
+    e3_car = Enemy(texture='assets/car9.png', scale=(3, 5.5), x=5)
+    e3_car_speed = random.uniform(5, 7)
+    e3_car.disable()
+
+    pause_handler.input = key_handler_input
     app.run()

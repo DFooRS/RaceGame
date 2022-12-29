@@ -1,5 +1,6 @@
-from ursina import *
 import random
+
+from ursina import *
 
 
 class Enemy(Entity):
@@ -7,21 +8,20 @@ class Enemy(Entity):
         super().__init__(
             model='quad',
             texture=texture,
-            #collider=,
             scale=scale,
             x=x
         )
-        self.collider = BoxCollider(self, center=Vec3(0, 0), size=Vec3(0.85, 0.95))
+        self.collider = BoxCollider(self, center=Vec3(0, 0), size=Vec3(0.8, 0.9))
 
     def update(self):
 
-        if self.x >= 6.2:
-            self.x = 6.2
+        if self.x >= 6:
+            self.x = 6
             self.shake()
 
-        if self.x <= -6.2:
-            self.x = -6.2
+        if self.x <= -6:
+            self.x = -6
             self.shake()
 
         if self.intersects().hit:
-            self.shake()
+            self.shake(0.02, 1, 0.01)

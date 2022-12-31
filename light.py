@@ -2,12 +2,13 @@ from ursina import *
 
 
 class Light(Entity):
-    def __init__(self, scale=(2.5, 3)):
+    def __init__(self, scale=(2, 2.5)):
         super().__init__(
             model='quad',
             texture='assets/svetofor.png',
             collidar='box',
             scale=scale,
+            y=2.5
         )
 
     def set_red(self):

@@ -31,7 +31,7 @@ def update():
             setattr(road1, "texture_offset", (0, road1.offset))
 
         if held_keys['s']:
-            road1.offset += time.dt * 0.3
+            road1.offset += time.dt * 0.4
             setattr(road1, "texture_offset", (0, road1.offset))
 
         invoke(menu.set_game, delay=3.2)
@@ -79,14 +79,13 @@ if __name__ == '__main__':
     road2.disable()
 
     e1_car = Enemy(x=-2)
-    e1_car_speed = random.uniform(5, 7)
+    e1_car_speed = random.uniform(5, 6.8)
     e1_car.disable()
-    e2_car = Enemy(texture='assets/car9.png', scale=(3, 5.5), x=-5)
-    e2_car.color = color.pink
-    e2_car_speed = random.uniform(5, 7)
+    e2_car = Enemy(texture='assets/car11.png', scale=(3, 5.3), x=-5)
+    e2_car_speed = random.uniform(4, 6)
     e2_car.disable()
     e3_car = Enemy(texture='assets/car9.png', scale=(3, 5.5), x=5)
-    e3_car_speed = random.uniform(5, 7)
+    e3_car_speed = random.uniform(5, 6.8)
     e3_car.disable()
 
     pause_handler.input = key_handler_input

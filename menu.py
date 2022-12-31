@@ -7,7 +7,7 @@ class MainMenu(Entity):
         super().__init__(
             parent=camera.ui
             )
-        self.start_menu = Entity(parent=self, model = 'quad', texture='assets/background.png', scale=(2, 1.5))
+        self.start_menu = Entity(parent=self, model='quad', texture='assets/background.png', scale=(2, 1.5))
         self.game = 0
         self.place = 4
 
@@ -23,6 +23,12 @@ class MainMenu(Entity):
                              scale=(0.2, 0.1),
                              y=-0.06,
                              parent=self.start_menu)
+        version = Text(text="RaceGame ver.0.3",
+                       parent=self.start_menu,
+                       x=0.3,
+                       y=-0.3,
+                       scale=(0.5, 0.6)
+                       )
 
         def play_game():
             self.start_menu.disable()
@@ -41,6 +47,13 @@ class MainMenu(Entity):
 
     def finish(self, car, e1_car, e2_car, e3_car):
         application.pause()
+        self.game = 3
+
+        cup = Entity(model='quad',
+                     texture='assets/finishflag.png',
+                     scale=(9, 7),
+                     )
+
         if car.y > e1_car.y:
             self.place -= 1
 
@@ -50,47 +63,29 @@ class MainMenu(Entity):
         if car.y > e3_car.y:
             self.place -= 1
 
-        empty = Text('\n\n\n')
-
         if self.place == 1:
-            t = Text('Congratulates!\nYou took the 1 place',
-                     x=0,
-                     y=0,
-                     )
+            cup.texture = 'assets/1stplace.png'
 
         if self.place == 2:
-            t = Text('Not bad!\nYou took the 2 place',
-                     x=0,
-                     y=0,
-                     )
+            cup.texture = 'assets/2ndplace.png'
 
         if self.place == 3:
-            t = Text('You can do better!\nYou took the 3 place',
-                     x=0,
-                     y=0,
-                     )
-
-        if self.place == 4:
-            t = Text("Don't get upset!\nYou took the 4 place",
-                     x=0,
-                     y=0,
-                     )
+            cup.texture = 'assets/3rdplace.png'
 
         exit_button = Button(text="Exit",
                              color=color.black,
-                             pressed_color=color.dark_gray,
-                             scale=(0.1, 0.05),
-                             y=-0.06)
+                             pressed_color=color.dark_gray
+                             )
 
         exit_button.on_click = application.quit
 
-        pied = Entity(model='quad', texture='assets/cup.png', scale=(10, 6))
+        empty = Text('\n\n\n\n')
+
         wp = WindowPanel(
             title='F I N I S H!',
             content=(
                 empty,
-                pied,
-                t,
+                cup,
                 exit_button
             ),
             y=0.4,

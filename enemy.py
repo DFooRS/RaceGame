@@ -9,7 +9,8 @@ class Enemy(Entity):
             model='quad',
             texture=texture,
             scale=scale,
-            x=x
+            x=x,
+            y=-1
         )
         self.collider = BoxCollider(self, center=Vec3(0, 0), size=Vec3(0.8, 0.9))
 
